@@ -1,0 +1,200 @@
+const form = document.getElementById("formSignup");
+const inputNombre = document.getElementById("nombre");
+const inputApellido = document.getElementById("apellido");
+const inputEmail = document.getElementById("email");
+const inputPassword = document.getElementById("password");
+const inputRepetirPassword = document.getElementById("repetirPassword");
+const mensajeErrorNombre = document.getElementById("mensajeErrorNombre");
+const mensajeErrorApellido = document.getElementById("mensajeErrorApellido");
+const mensajeErrorEmail = document.getElementById("mensajeErrorEmail");
+const mensajeErrorPassword = document.getElementById("mensajeErrorPassword");
+const mensajeErrorRepetirPassword = document.getElementById(
+  "mensajeErrorRepetirPassword"
+);
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let mensajesError = [];
+
+  function cargarMensajeVacio(inputName) {
+    mensajesError.push({
+      input: inputName,
+      error: "",
+    });
+  }
+
+  let inputNombreValue = inputNombre.value;
+
+  if (inputNombreValue == "" || inputNombreValue == null) {
+    mensajesError.push({
+      input: "Nombre Vacio",
+      error: "Este campo es obligatorio",
+    });
+  } else if (inputNombreValue.length <= 2) {
+    mensajesError.push({
+      input: "Nombre Corto",
+      error: "El nombre debe contener al menos 3 caracteres",
+    });
+  } else if (inputNombreValue.length > 30) {
+    mensajesError.push({
+      input: "Nombre Largo",
+      error: "El nombre es demasiado largo",
+    });
+  } else {
+    cargarMensajeVacio("Nombre Ok");
+  }
+
+  let inputApellidoValue = inputApellido.value;
+
+  if (inputApellidoValue == "" || inputApellidoValue == null) {
+    mensajesError.push({
+      input: "Apellido Vacio",
+      error: "Este campo es obligatorio",
+    });
+  } else if (inputApellidoValue.length <= 2) {
+    mensajesError.push({
+      input: "Apellido Corto",
+      error: "El apellido debe contener al menos 3 caracteres",
+    });
+  } else if (inputApellidoValue.length > 30) {
+    mensajesError.push({
+      input: "Apellido Largo",
+      error: "El apellido es demasiado largo",
+    });
+  } else {
+    cargarMensajeVacio("Apellido Ok");
+  }
+
+  let inputEmailValue = inputEmail.value;
+
+  if (inputEmailValue == "" || inputEmailValue == null) {
+    mensajesError.push({
+      input: "Email Vacio",
+      error: "Este campo es obligatorio",
+    });
+  } else if (
+    !inputEmailValue.match(
+      /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)$/
+    )
+  ) {
+    mensajesError.push({
+      input: "Email Incorrecto",
+      error: "El mail ingresado es invalido",
+    });
+  } else {
+    cargarMensajeVacio("Email Ok");
+  }
+
+  let inputPasswordValue = inputPassword.value;
+
+  if (inputPasswordValue == "" || inputPasswordValue == null) {
+    mensajesError.push({
+      input: "Password Vacia",
+      error: "Este campo es obligatorio",
+    });
+  } else if (inputPasswordValue.length < 6) {
+    mensajesError.push({
+      input: "Password Corta",
+      error: "La constraseña debe contener al menos 6 caracteres",
+    });
+  } else if (inputPasswordValue.length > 30) {
+    mensajesError.push({
+      input: "Password Larga",
+      error: "La constraseña es demasiado larga",
+    });
+  } else {
+    cargarMensajeVacio("Password Ok");
+  }
+
+  let inputRepetirPasswordValue = inputRepetirPassword.value;
+
+  if (inputRepetirPasswordValue == "" || inputRepetirPasswordValue == null) {
+    mensajesError.push({
+      input: "Repetir Password Vacia",
+      error: "Este campo es obligatorio",
+    });
+  } else if (inputRepetirPasswordValue != inputPasswordValue) {
+    mensajesError.push({
+      input: "Passwords No Coinciden",
+      error: "Las contraseñas deben ser coincidentes",
+    });
+  } else {
+    cargarMensajeVacio("Repetir Password Ok");
+  }
+
+  if (mensajesError.length !== 0) {
+    mensajesError.forEach(function (e) {
+      switch (e.input) {
+        case "Nombre Vacio":
+          mensajeErrorNombre.innerText = e.error;
+          break;
+        case "Nombre Corto":
+          mensajeErrorNombre.innerText = e.error;
+          break;
+        case "Nombre Largo":
+          mensajeErrorNombre.innerText = e.error;
+          break;
+        case "Nombre Ok":
+          mensajeErrorNombre.innerText = e.error;
+          break;
+
+        case "Apellido Vacio":
+          mensajeErrorApellido.innerText = e.error;
+          break;
+
+        case "Apellido Corto":
+          mensajeErrorApellido.innerText = e.error;
+          break;
+        case "Apellido Largo":
+          mensajeErrorApellido.innerText = e.error;
+          break;
+
+        case "Apellido Ok":
+          mensajeErrorApellido.innerText = e.error;
+          break;
+
+        case "Email Vacio":
+          mensajeErrorEmail.innerText = e.error;
+          break;
+
+        case "Email Incorrecto":
+          mensajeErrorEmail.innerText = e.error;
+          break;
+
+        case "Email Ok":
+          mensajeErrorEmail.innerText = e.error;
+          break;
+
+        case "Password Vacia":
+          mensajeErrorPassword.innerText = e.error;
+          break;
+
+        case "Password Corta":
+          mensajeErrorPassword.innerText = e.error;
+          break;
+
+        case "Password Larga":
+          mensajeErrorPassword.innerText = e.error;
+          break;
+
+        case "Password Ok":
+          mensajeErrorPassword.innerText = e.error;
+          break;
+
+        case "Repetir Password Vacia":
+          mensajeErrorRepetirPassword.innerText = e.error;
+          break;
+
+        case "Passwords No Coinciden":
+          mensajeErrorRepetirPassword.innerText = e.error;
+          break;
+
+        case "Repetir Password Ok":
+          mensajeErrorRepetirPassword.innerText = e.error;
+          break;
+      }
+    });
+  } else {
+    form.submit();
+  }
+});
